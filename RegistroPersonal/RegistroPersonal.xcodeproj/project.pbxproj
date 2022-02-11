@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283F7C8C27B6EB2E0058AEA6 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 283F7C8B27B6EB2E0058AEA6 /* iPhoneNumberField */; };
 		28BA3F8027B59C32007D9125 /* RegistroPersonalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA3F7F27B59C32007D9125 /* RegistroPersonalApp.swift */; };
 		28BA3F8227B59C32007D9125 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA3F8127B59C32007D9125 /* ContentView.swift */; };
 		28BA3F8427B59C34007D9125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28BA3F8327B59C34007D9125 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283F7C8C27B6EB2E0058AEA6 /* iPhoneNumberField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +116,7 @@
 			);
 			name = RegistroPersonal;
 			packageProductDependencies = (
+				283F7C8B27B6EB2E0058AEA6 /* iPhoneNumberField */,
 			);
 			productName = RegistroPersonal;
 			productReference = 28BA3F7C27B59C32007D9125 /* RegistroPersonal.app */;
@@ -144,7 +147,7 @@
 			);
 			mainGroup = 28BA3F7327B59C32007D9125;
 			packageReferences = (
-				28D6289127B5E06200D2C64E /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				283F7C8A27B6EB2E0058AEA6 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 			);
 			productRefGroup = 28BA3F7D27B59C32007D9125 /* Products */;
 			projectDirPath = "";
@@ -390,15 +393,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		28D6289127B5E06200D2C64E /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+		283F7C8A27B6EB2E0058AEA6 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		283F7C8B27B6EB2E0058AEA6 /* iPhoneNumberField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 283F7C8A27B6EB2E0058AEA6 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
+			productName = iPhoneNumberField;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 28BA3F7427B59C32007D9125 /* Project object */;
 }

@@ -10,11 +10,11 @@ struct Employee: Identifiable {
     var name: String
     var stlastName: String
     var ndLastName: String
-    var phone: Int
+    var phone: String
     var dateBirth: Date
     var email: String
     
-    init(id: String, area: String, name: String, stlastName: String, ndLastName: String, phone: Int, dateBirth: Date, email: String) {
+    init(id: String, area: String, name: String, stlastName: String, ndLastName: String, phone: String, dateBirth: Date, email: String) {
         self.id = id
         self.area = area
         self.name = name

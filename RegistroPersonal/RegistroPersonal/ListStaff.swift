@@ -43,7 +43,7 @@ struct ListStaff: View {
             )
             .onAppear(){
                 if staffLst.count == 0 {
-                    staffLst.append(Employee(id: UUID().uuidString, area: "Software", name: "Narciso", stlastName: "Meza", ndLastName: "Baltazar", phone: 4775812770, dateBirth: Date.now, email: "ncismeba@gmail.com"))
+                    staffLst.append(Employee(id: UUID().uuidString, area: "Software", name: "Narciso", stlastName: "Meza", ndLastName: "Baltazar", phone: "4775812770", dateBirth: Date.now, email: "ncismeba@gmail.com"))
                 }
             }
         }

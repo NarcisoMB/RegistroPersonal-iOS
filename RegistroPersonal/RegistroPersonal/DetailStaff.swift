@@ -3,6 +3,8 @@
 //  Created by Narciso Meza on 10/02/22.
 
 import SwiftUI
+import iPhoneNumberField
+
 
 struct DetailStaff: View {
     
@@ -18,7 +20,9 @@ struct DetailStaff: View {
     @State var ndLastName: String = "Baltazar"
     @State var dateBirth: Date = Date.now
     @State var email: String = "ncismeba@gmail.com"
-    @State var phone: String = "+524775812770"
+    @State var phone: String = ""
+//    @ObservedObject var phoneInput = TextLimiter(limit: 11)
+
     
     @FocusState var focusedField: Field?
     
@@ -83,10 +87,12 @@ struct DetailStaff: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .submitLabel(.next)
-                TextField("Telefeno", text: $phone)
+                iPhoneNumberField("Phone", text: $phone)
+                    .flagHidden(false)
+                    .flagSelectable(true)
+                    .maximumDigits(10)
                     .focused($focusedField, equals: .phone)
                     .padding(.horizontal, 16)
-                    .keyboardType(.phonePad)
                     .padding(.vertical, 8)
                 Picker("Area", selection: $area) {
                     Text("Software").tag("software")
@@ -103,7 +109,7 @@ struct DetailStaff: View {
                 trailing:
                     Button(action: {
                         model.state = .listStaff
-                        staffLst.append(Employee(id: UUID().uuidString, area: area, name: name, stlastName: stlastName, ndLastName: ndLastName, phone: Int(phone[phone.index(phone.startIndex, offsetBy: 1)...])!, dateBirth: dateBirth, email: email))
+                        staffLst.append(Employee(id: UUID().uuidString, area: area, name: name, stlastName: stlastName, ndLastName: ndLastName, phone: phone, dateBirth: dateBirth, email: email))
                     }){
                         Text("Agregar")
                     }
