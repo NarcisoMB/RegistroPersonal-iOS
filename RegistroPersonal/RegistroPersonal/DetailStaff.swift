@@ -21,8 +21,6 @@ struct DetailStaff: View {
     @State var dateBirth: Date = Date.now
     @State var email: String = "ncismeba@gmail.com"
     @State var phone: String = ""
-//    @ObservedObject var phoneInput = TextLimiter(limit: 11)
-
     
     @FocusState var focusedField: Field?
     
@@ -109,6 +107,7 @@ struct DetailStaff: View {
                 trailing:
                     Button(action: {
                         model.state = .listStaff
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         staffLst.append(Employee(id: UUID().uuidString, area: area, name: name, stlastName: stlastName, ndLastName: ndLastName, phone: phone, dateBirth: dateBirth, email: email))
                     }){
                         Text("Agregar")

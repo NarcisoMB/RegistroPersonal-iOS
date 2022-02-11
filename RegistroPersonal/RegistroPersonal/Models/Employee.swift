@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Employee: Identifiable {
+struct Employee: Identifiable, Equatable {
     var id: String
     var area: String
     var name: String

@@ -18,13 +18,14 @@ struct ListStaff: View {
                         Text(employee.name)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button(role: .destructive) {
-                                    print("\(employee.name) is being deleted.")
+                                    staffLst.remove(at: staffLst.firstIndex(of: employee)!)
+
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
                                 Button(role: .cancel) {
                                     print("\(employee.name) is being edited.")
-                                    
+                                    model.state = .detailStaff
                                 } label: {
                                     Label("Edit", systemImage: "pencil")
                                 }

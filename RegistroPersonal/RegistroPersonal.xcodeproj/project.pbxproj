@@ -62,15 +62,15 @@
 		28BA3F7E27B59C32007D9125 /* RegistroPersonal */ = {
 			isa = PBXGroup;
 			children = (
-				28D6289427B5E43600D2C64E /* Helpers */,
 				28D6289027B5DA1100D2C64E /* Info.plist */,
-				28BA3F8D27B59DB6007D9125 /* Models */,
-				28BA3F7F27B59C32007D9125 /* RegistroPersonalApp.swift */,
-				28BA3F8127B59C32007D9125 /* ContentView.swift */,
 				28BA3F8327B59C34007D9125 /* Assets.xcassets */,
-				28BA3F8527B59C34007D9125 /* Preview Content */,
+				28BA3F8127B59C32007D9125 /* ContentView.swift */,
 				28D6289727B5F92A00D2C64E /* DetailStaff.swift */,
 				28D6289927B5F95500D2C64E /* ListStaff.swift */,
+				28BA3F7F27B59C32007D9125 /* RegistroPersonalApp.swift */,
+				28D6289427B5E43600D2C64E /* Helpers */,
+				28BA3F8D27B59DB6007D9125 /* Models */,
+				28BA3F8527B59C34007D9125 /* Preview Content */,
 			);
 			path = RegistroPersonal;
 			sourceTree = "<group>";
