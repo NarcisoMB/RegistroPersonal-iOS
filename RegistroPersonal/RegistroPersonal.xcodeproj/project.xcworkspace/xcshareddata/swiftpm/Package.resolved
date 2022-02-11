@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "PartialSheet",
+        "repositoryURL": "https://github.com/AndreaMiotto/PartialSheet",
+        "state": {
+          "branch": "master",
+          "revision": "422d748bfb149b2af4b48e43b7b6197bd8a727c1",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

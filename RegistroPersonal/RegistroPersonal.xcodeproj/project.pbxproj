@@ -12,6 +12,9 @@
 		28BA3F8427B59C34007D9125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28BA3F8327B59C34007D9125 /* Assets.xcassets */; };
 		28BA3F8727B59C34007D9125 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28BA3F8627B59C34007D9125 /* Preview Assets.xcassets */; };
 		28BA3F8F27B59DC5007D9125 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA3F8E27B59DC5007D9125 /* Employee.swift */; };
+		28D6289627B5E44B00D2C64E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D6289527B5E44B00D2C64E /* Constants.swift */; };
+		28D6289827B5F92A00D2C64E /* DetailStaff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D6289727B5F92A00D2C64E /* DetailStaff.swift */; };
+		28D6289A27B5F95500D2C64E /* ListStaff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D6289927B5F95500D2C64E /* ListStaff.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		28BA3F8627B59C34007D9125 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28BA3F8E27B59DC5007D9125 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		28D6289027B5DA1100D2C64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		28D6289527B5E44B00D2C64E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../../../PruebaElektra/PruebaElektra/PruebaElektra/Helpers/Constants.swift; sourceTree = "<group>"; };
+		28D6289727B5F92A00D2C64E /* DetailStaff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStaff.swift; sourceTree = "<group>"; };
+		28D6289927B5F95500D2C64E /* ListStaff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStaff.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +60,15 @@
 		28BA3F7E27B59C32007D9125 /* RegistroPersonal */ = {
 			isa = PBXGroup;
 			children = (
+				28D6289427B5E43600D2C64E /* Helpers */,
 				28D6289027B5DA1100D2C64E /* Info.plist */,
 				28BA3F8D27B59DB6007D9125 /* Models */,
 				28BA3F7F27B59C32007D9125 /* RegistroPersonalApp.swift */,
 				28BA3F8127B59C32007D9125 /* ContentView.swift */,
 				28BA3F8327B59C34007D9125 /* Assets.xcassets */,
 				28BA3F8527B59C34007D9125 /* Preview Content */,
+				28D6289727B5F92A00D2C64E /* DetailStaff.swift */,
+				28D6289927B5F95500D2C64E /* ListStaff.swift */,
 			);
 			path = RegistroPersonal;
 			sourceTree = "<group>";
@@ -80,6 +89,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		28D6289427B5E43600D2C64E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				28D6289527B5E44B00D2C64E /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -96,6 +113,8 @@
 			dependencies = (
 			);
 			name = RegistroPersonal;
+			packageProductDependencies = (
+			);
 			productName = RegistroPersonal;
 			productReference = 28BA3F7C27B59C32007D9125 /* RegistroPersonal.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +143,9 @@
 				Base,
 			);
 			mainGroup = 28BA3F7327B59C32007D9125;
+			packageReferences = (
+				28D6289127B5E06200D2C64E /* XCRemoteSwiftPackageReference "PartialSheet" */,
+			);
 			productRefGroup = 28BA3F7D27B59C32007D9125 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -150,9 +172,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D6289A27B5F95500D2C64E /* ListStaff.swift in Sources */,
 				28BA3F8227B59C32007D9125 /* ContentView.swift in Sources */,
 				28BA3F8F27B59DC5007D9125 /* Employee.swift in Sources */,
 				28BA3F8027B59C32007D9125 /* RegistroPersonalApp.swift in Sources */,
+				28D6289627B5E44B00D2C64E /* Constants.swift in Sources */,
+				28D6289827B5F92A00D2C64E /* DetailStaff.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +388,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		28D6289127B5E06200D2C64E /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 28BA3F7427B59C32007D9125 /* Project object */;
 }

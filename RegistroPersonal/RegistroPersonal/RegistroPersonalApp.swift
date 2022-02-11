@@ -1,17 +1,21 @@
-//
 //  RegistroPersonalApp.swift
 //  RegistroPersonal
-//
 //  Created by Narciso Meza on 10/02/22.
-//
 
 import SwiftUI
 
 @main
 struct RegistroPersonalApp: App {
+    
+    @ObservedObject var model = SwiftUIViewCModel.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if model.state == .listStaff{
+                ListStaff()
+            }else if model.state == .detailStaff{
+                DetailStaff()
+            }
         }
     }
 }
