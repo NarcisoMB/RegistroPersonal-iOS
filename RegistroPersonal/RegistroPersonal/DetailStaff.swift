@@ -10,15 +10,16 @@ struct DetailStaff: View {
         case name, stlastName, ndLastName, email, phone
     }
     
-    @State var name: String = ""
-    @State var area: String = ""
-    @State var stlastName: String = ""
-    @State var ndLastName: String = ""
-    @State var dateBirth: Date = Date.now
-    @State var email: String = ""
-    @State var phone: Int!
+    @Binding var staffLst: [Employee]
     
-    @FocusState var isInputActive: Bool
+    @State var name: String = "Narciso2"
+    @State var area: String = "software"
+    @State var stlastName: String = "Meza"
+    @State var ndLastName: String = "Baltazar"
+    @State var dateBirth: Date = Date.now
+    @State var email: String = "ncismeba@gmail.com"
+    @State var phone: String = "+524775812770"
+    
     @FocusState var focusedField: Field?
     
     @ObservedObject var model = SwiftUIViewCModel.shared
@@ -27,35 +28,39 @@ struct DetailStaff: View {
         NavigationView {
             Form {
                 TextField("Nombre", text: $name)
-                    .onSubmit { focusedField = .stlastName }
                     .focused($focusedField, equals: .name)
+                    .onSubmit { focusedField = .stlastName }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .submitLabel(.next)
                     .toolbar(content: {
                         ToolbarItemGroup(placement: .keyboard) {
-                            Button(action: {
-                                focusedField = focusedField.map {
-                                    Field(rawValue: $0.rawValue - 1) ?? .phone
+                            HStack{
+                                Button(action: {
+                                    focusedField = focusedField.map {
+                                        Field(rawValue: $0.rawValue - 1) ?? .phone
+                                    }
+                                    focusedField.map {
+                                        print($0.rawValue)
+                                    }
+                                }){
+                                    Image(systemName: "chevron.up")
                                 }
-                                focusedField.map {
-                                    print($0.rawValue)
+                                Button(action: {
+                                    focusedField = focusedField.map {
+                                        Field(rawValue: $0.rawValue + 1) ?? .name
+                                    }
+                                    focusedField.map {
+                                        print($0.rawValue)
+                                    }
+                                }){
+                                    Image(systemName: "chevron.down")
                                 }
-                            }){
-                                Image(systemName: "chevron.up")
+                                Spacer()
+                                Button("Listo") {
+                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                }
                             }
-                            Button(action: {
-                                focusedField = focusedField.map {
-                                    Field(rawValue: $0.rawValue + 1) ?? .name
-                                }
-                                focusedField.map {
-                                    print($0.rawValue)
-                                }
-                            }){
-                                Image(systemName: "chevron.down")
-                            }
-                            Spacer()
-                            Button("Hide") { isInputActive = false }
                         }
                     })
                 TextField("Apellido Paterno", text: $stlastName)
@@ -74,10 +79,11 @@ struct DetailStaff: View {
                     .focused($focusedField, equals: .email)
                     .onSubmit { focusedField = .phone }
                     .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .submitLabel(.next)
-                TextField("Telefeno", value: $phone, formatter: NumberFormatter())
+                TextField("Telefeno", text: $phone)
                     .focused($focusedField, equals: .phone)
                     .padding(.horizontal, 16)
                     .keyboardType(.phonePad)
@@ -88,7 +94,7 @@ struct DetailStaff: View {
                     
                 }
                 .pickerStyle(.segmented)
-                DatePicker("Pick a date", selection: $dateBirth, in: Date()..., displayedComponents: [.date])
+                DatePicker("Pick a date", selection: $dateBirth, displayedComponents: [.date])
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
             }
@@ -97,20 +103,11 @@ struct DetailStaff: View {
                 trailing:
                     Button(action: {
                         model.state = .listStaff
+                        staffLst.append(Employee(id: UUID().uuidString, area: area, name: name, stlastName: stlastName, ndLastName: ndLastName, phone: Int(phone[phone.index(phone.startIndex, offsetBy: 1)...])!, dateBirth: dateBirth, email: email))
                     }){
                         Text("Agregar")
                     }
             )
         }
-        .onAppear {
-            self.isInputActive = true
-            self.focusedField = .name
-        }
-    }
-}
-
-struct DetailStaff_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailStaff()
     }
 }

@@ -7,14 +7,16 @@ import SwiftUI
 @main
 struct RegistroPersonalApp: App {
     
+    @State var staffLst: [Employee] = []
+    
     @ObservedObject var model = SwiftUIViewCModel.shared
     
     var body: some Scene {
         WindowGroup {
             if model.state == .listStaff{
-                ListStaff()
+                ListStaff(staffLst: $staffLst)
             }else if model.state == .detailStaff{
-                DetailStaff()
+                DetailStaff(staffLst: $staffLst)
             }
         }
     }

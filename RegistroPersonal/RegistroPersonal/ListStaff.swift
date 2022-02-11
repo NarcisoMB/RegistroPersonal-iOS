@@ -6,7 +6,7 @@ import SwiftUI
 
 struct ListStaff: View {
     
-    var staffLst: [Employee] = [Employee(id: UUID().uuidString, area: "Software", name: "Narciso", stlastName: "Meza", ndLastName: "Baltazar", phone: 4775812770, dateBirth: Date.now, email: "ncismeba@gmail.com")]
+    @Binding var staffLst: [Employee]
     
     @ObservedObject var model = SwiftUIViewCModel.shared
     
@@ -41,12 +41,11 @@ struct ListStaff: View {
                         Label("Add", systemImage: "plus")
                     }
             )
+            .onAppear(){
+                if staffLst.count == 0 {
+                    staffLst.append(Employee(id: UUID().uuidString, area: "Software", name: "Narciso", stlastName: "Meza", ndLastName: "Baltazar", phone: 4775812770, dateBirth: Date.now, email: "ncismeba@gmail.com"))
+                }
+            }
         }
-    }
-}
-
-struct ListStaff_Previews: PreviewProvider {
-    static var previews: some View {
-        ListStaff()
     }
 }
