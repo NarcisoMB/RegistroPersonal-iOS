@@ -6,6 +6,8 @@ import SwiftUI
 
 struct ListStaff: View {
     
+    @Binding var readOnly: Bool
+    @Binding var staff: Employee
     @Binding var staffLst: [Employee]
     
     @ObservedObject var model = SwiftUIViewCModel.shared
@@ -23,12 +25,23 @@ struct ListStaff: View {
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
-                                Button(role: .cancel) {
-                                    print("\(employee.name) is being edited.")
+                                Button() {
+                                    staff = employee
                                     model.state = .detailStaff
                                 } label: {
                                     Label("Edit", systemImage: "pencil")
                                 }
+                                .tint(.blue)
+                            }
+                            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                Button() {
+                                    readOnly = true
+                                    staff = employee
+                                    model.state = .detailStaff
+                                } label: {
+                                    Label("View", systemImage: "eye")
+                                }
+                                .tint(.blue)
                             }
                     }
                 }
@@ -44,7 +57,7 @@ struct ListStaff: View {
             )
             .onAppear(){
                 if staffLst.count == 0 {
-                    staffLst.append(Employee(id: UUID().uuidString, area: "Software", name: "Narciso", stlastName: "Meza", ndLastName: "Baltazar", phone: "4775812770", dateBirth: Date.now, email: "ncismeba@gmail.com"))
+                    staffLst.append(Employee(id: UUID().uuidString, area: "software", name: "Narciso", stLastName: "Meza", ndLastName: "Baltazar", phone: "(477) 581-2770", dateBirth: Date.now, email: "ncismeba@gmail.com"))
                 }
             }
         }
