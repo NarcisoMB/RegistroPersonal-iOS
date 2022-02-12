@@ -13,6 +13,17 @@ struct RegistroPersonalApp: App {
     
     @ObservedObject var model = SwiftUIViewCModel.shared
     
+    init(){
+        if ConnectToDB(){
+            staffLst = SelectFromDB()
+            print("\n\nLista empleados\n\n\(staffLst)\n\n")
+            if staffLst.count == 0 {
+                staffLst.append(Employee(id: UUID().uuidString, area: "software", name: "Narciso", stLastName: "Meza", ndLastName: "Baltazar", phone: "(477) 581-2770", dateBirth: Date.now, email: "ncismeba@gmail.com"))
+            }
+        }
+//        InsertIntoDB()
+    }
+    
     var body: some Scene {
         WindowGroup {
             if model.state == .listStaff{

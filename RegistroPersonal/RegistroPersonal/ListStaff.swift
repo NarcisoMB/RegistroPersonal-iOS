@@ -48,6 +48,12 @@ struct ListStaff: View {
             }
             .navigationBarTitle("Lista Empleados")
             .navigationBarItems(
+                leading:
+                    Button(action: {
+
+                    }){
+                        Label("Add", systemImage: "arrow.counterclockwise.icloud")
+                    },
                 trailing:
                     Button(action: {
                         model.state = .detailStaff
@@ -56,9 +62,7 @@ struct ListStaff: View {
                     }
             )
             .onAppear(){
-                if staffLst.count == 0 {
-                    staffLst.append(Employee(id: UUID().uuidString, area: "software", name: "Narciso", stLastName: "Meza", ndLastName: "Baltazar", phone: "(477) 581-2770", dateBirth: Date.now, email: "ncismeba@gmail.com"))
-                }
+                
             }
         }
     }

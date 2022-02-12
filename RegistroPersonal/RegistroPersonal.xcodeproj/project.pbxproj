@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		283F7C8C27B6EB2E0058AEA6 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 283F7C8B27B6EB2E0058AEA6 /* iPhoneNumberField */; };
+		288A963127B7504E00C0CF9B /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 288A963027B7504E00C0CF9B /* SQLite */; };
+		288A963327B7506A00C0CF9B /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A963227B7506A00C0CF9B /* SQLite.swift */; };
 		28BA3F8027B59C32007D9125 /* RegistroPersonalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA3F7F27B59C32007D9125 /* RegistroPersonalApp.swift */; };
 		28BA3F8227B59C32007D9125 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA3F8127B59C32007D9125 /* ContentView.swift */; };
 		28BA3F8427B59C34007D9125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28BA3F8327B59C34007D9125 /* Assets.xcassets */; };
@@ -19,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		288A963227B7506A00C0CF9B /* SQLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
 		28BA3F7C27B59C32007D9125 /* RegistroPersonal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegistroPersonal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BA3F7F27B59C32007D9125 /* RegistroPersonalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroPersonalApp.swift; sourceTree = "<group>"; };
 		28BA3F8127B59C32007D9125 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				288A963127B7504E00C0CF9B /* SQLite in Frameworks */,
 				283F7C8C27B6EB2E0058AEA6 /* iPhoneNumberField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				28D6289527B5E44B00D2C64E /* Constants.swift */,
+				288A963227B7506A00C0CF9B /* SQLite.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			name = RegistroPersonal;
 			packageProductDependencies = (
 				283F7C8B27B6EB2E0058AEA6 /* iPhoneNumberField */,
+				288A963027B7504E00C0CF9B /* SQLite */,
 			);
 			productName = RegistroPersonal;
 			productReference = 28BA3F7C27B59C32007D9125 /* RegistroPersonal.app */;
@@ -148,6 +154,7 @@
 			mainGroup = 28BA3F7327B59C32007D9125;
 			packageReferences = (
 				283F7C8A27B6EB2E0058AEA6 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				288A962F27B7504E00C0CF9B /* XCRemoteSwiftPackageReference "SQLite" */,
 			);
 			productRefGroup = 28BA3F7D27B59C32007D9125 /* Products */;
 			projectDirPath = "";
@@ -176,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D6289A27B5F95500D2C64E /* ListStaff.swift in Sources */,
+				288A963327B7506A00C0CF9B /* SQLite.swift in Sources */,
 				28BA3F8227B59C32007D9125 /* ContentView.swift in Sources */,
 				28BA3F8F27B59DC5007D9125 /* Employee.swift in Sources */,
 				28BA3F8027B59C32007D9125 /* RegistroPersonalApp.swift in Sources */,
@@ -401,6 +409,14 @@
 				minimumVersion = 0.6.1;
 			};
 		};
+		288A962F27B7504E00C0CF9B /* XCRemoteSwiftPackageReference "SQLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -408,6 +424,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 283F7C8A27B6EB2E0058AEA6 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
 			productName = iPhoneNumberField;
+		};
+		288A963027B7504E00C0CF9B /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 288A962F27B7504E00C0CF9B /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
