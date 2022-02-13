@@ -20,8 +20,8 @@ struct ListStaff: View {
                         Text(employee.name)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button(role: .destructive) {
-                                    staffLst.remove(at: staffLst.firstIndex(of: employee)!)
-
+                                    DeleteFromDataBase(staff: employee)
+                                    staffLst = SelectFromDB()
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -62,7 +62,13 @@ struct ListStaff: View {
                     }
             )
             .onAppear(){
-                
+                staffLst = SelectFromDB()
+                print("\n\nLista empleados\n\n\(staffLst)\n\n")
+                if staffLst.count == 0 {
+                    staff = Employee(id: UUID().uuidString, area: "software", name: "Narciso", stLastName: "Meza", ndLastName: "Baltazar", phone: "(477) 581-2770", dateBirth: "1995-10-26 11:00:00", email: "ncismeba@gmail.com")
+                    staffLst.append(staff)
+                    staff = Employee()
+                }
             }
         }
     }

@@ -8,6 +8,8 @@ import iPhoneNumberField
 
 struct DetailStaff: View {
     
+    let dateFormatter = DateFormatter()
+    
     enum Field: Int, CaseIterable {
         case name, stLastName, ndLastName, email, phone
     }
@@ -16,6 +18,7 @@ struct DetailStaff: View {
     @Binding var staff: Employee
     @Binding var staffLst: [Employee]
     
+    @State var spaces = ""
     @State var name: String = ""
     @State var area: String = ""
     @State var stLastName: String = ""
@@ -23,7 +26,8 @@ struct DetailStaff: View {
     @State var email: String = ""
     @State var phone: String = ""
     @State var dateBirth: Date = Date.now
-    @State private var showAlert = false
+    @State private var successfulInsertion = false
+    @State private var emptySpaces = false
     
     @FocusState var focusedField: Field?
     
@@ -50,18 +54,12 @@ struct DetailStaff: View {
                                     focusedField = focusedField.map {
                                         Field(rawValue: $0.rawValue - 1) ?? .phone
                                     }
-                                    focusedField.map {
-                                        print($0.rawValue)
-                                    }
                                 }){
                                     Image(systemName: "chevron.up")
                                 }
                                 Button(action: {
                                     focusedField = focusedField.map {
                                         Field(rawValue: $0.rawValue + 1) ?? .name
-                                    }
-                                    focusedField.map {
-                                        print($0.rawValue)
                                     }
                                 }){
                                     Image(systemName: "chevron.down")
@@ -135,7 +133,8 @@ struct DetailStaff: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .onAppear(perform: {
-                        dateBirth = staff.dateBirth == nil ? Date.now : staff.dateBirth
+                        dateFormatter.dateFormat = "y-MM-dd HH:mm:ss"
+                        dateBirth = (dateFormatter.date(from: staff.dateBirth) == nil ? Date.now : dateFormatter.date(from: staff.dateBirth))!
                     })
             }
             .navigationBarTitle(staff.id.isEmpty ? (readOnly ? "Detalle Empleado" : "Agregar Empleados") : "Modificar Empleado")
@@ -151,39 +150,60 @@ struct DetailStaff: View {
                     },
                 trailing:
                     Button(action: {
-                        showAlert = true
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        print(staff)
-                        if (area == "" || name == "" || stLastName == "" || ndLastName == "" || phone == "" || dateBirth == Date.now) {
+                        if (area == "" || name == "" || email == "" || stLastName == "" || ndLastName == "" || phone == "" || dateBirth == Date.now) {
                             
+                            spaces = ""
+                            
+                            spaces = name == "" ? spaces + "\nNombre" : spaces
+                            spaces = stLastName == "" ? spaces + "\nApellido Paterno" : spaces
+                            spaces = ndLastName == "" ? spaces + "\nApellido Materno" : spaces
+                            spaces = phone == "" ? spaces + "\nTelefono" : spaces
+                            spaces = email == "" ? spaces + "\nCorreo Electronico" : spaces
+                            spaces = area == "" ? spaces + "\nArea" : spaces
+                            spaces = !(staff.id.isEmpty) ? spaces : ((Calendar.current.isDate(dateBirth, equalTo: Date.now, toGranularity: .day)) ? spaces + "\nFecha de Nacimiento" : spaces)
+                            
+                            emptySpaces = true
                         }else{
                             if !(staff.id.isEmpty) {
-                                let index = staffLst.firstIndex(of: staff)!
-                                staffLst[index].area = area
-                                staffLst[index].name = name
-                                staffLst[index].stLastName = stLastName
-                                staffLst[index].ndLastName = ndLastName
-                                staffLst[index].phone = phone
-                                staffLst[index].dateBirth = dateBirth
-                                staff = Employee()
+                                
+                                var newStaff = Employee()
+                                
+                                print("Formatter\n\(dateFormatter.string(from: dateBirth))")
+                                
+                                newStaff.area = area
+                                newStaff.name = name
+                                newStaff.stLastName = stLastName
+                                newStaff.ndLastName = ndLastName
+                                newStaff.phone = phone
+                                newStaff.email = email
+                                newStaff.dateBirth = dateFormatter.string(from: dateBirth)
+                                
+                                print("Original\n\(staff)\nNuevo\n\(newStaff)")
+                                
+                                _ = UpdateToDB(staff: staff, newStaff: newStaff)
+                                print("Salio del Update")
                             }else{
-                                staffLst.append(Employee(id: UUID().uuidString, area: area, name: name, stLastName: stLastName, ndLastName: ndLastName, phone: phone, dateBirth: dateBirth, email: email))
-                                staff = Employee()
+                                staff = Employee(id: UUID().uuidString, area: area, name: name, stLastName: stLastName, ndLastName: ndLastName, phone: phone, dateBirth: dateFormatter.string(from: dateBirth), email: email)
+                                successfulInsertion = InsertIntoDB(staff: staff)
                             }
+                            staff = Employee()
+                            model.state = .listStaff
                         }
-                        model.state = .listStaff
                     }){
                         if !(readOnly) {
                             Text("Guardar")
                         }
                     }
-                    .alert(isPresented: $showAlert) {
+                    .alert(isPresented: $successfulInsertion) {
                         Alert(title: Text("Empleado Agregado."))
+                    }
+                    .alert(isPresented: $emptySpaces) {
+                        Alert(title: Text("Campos Vacios"), message: Text("Error en los siguientes campos:\(spaces)"), dismissButton: .default(Text("Ok")))
                     }
             )
         }
         .onAppear(perform: {
-            print("Empleado\n\(staff)")
             phone = staff.phone == "" ? phone : staff.phone
         })
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in

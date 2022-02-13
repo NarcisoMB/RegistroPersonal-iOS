@@ -11,7 +11,7 @@ struct Employee: Identifiable, Equatable {
     var stLastName: String = ""
     var ndLastName: String = ""
     var phone: String = ""
-    var dateBirth: Date!
+    var dateBirth: String = ""
     var email: String = ""
     
 //    init(id: String, area: String, name: String, stLastName: String, ndLastName: String, phone: String, dateBirth: Date, email: String) {
