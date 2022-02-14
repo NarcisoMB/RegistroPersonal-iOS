@@ -5,12 +5,9 @@
 import Foundation
 import SQLite
 
-let databaseFileName = "dbtest.sqlite3"
-let databaseFilePath = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(databaseFileName)"
-
 func ConnectToDB() -> Bool {
     do {
-        let _ = try Connection(databaseFilePath)
+        let _ = try Connection(Constants.databaseFilePath)
         return true
     }catch{
         print(error)
@@ -20,7 +17,7 @@ func ConnectToDB() -> Bool {
 
 func CreateTable() -> Bool {
     do {
-        let db = try Connection(databaseFilePath)
+        let db = try Connection(Constants.databaseFilePath)
         
         let employees = Table("employees")
         let id = Expression<String>("id")
@@ -42,12 +39,13 @@ func CreateTable() -> Bool {
             t.column(dateBirth)
             t.column(email)
         })
+        return true
         // CREATE TABLE "users" (
         //     "id" INTEGER PRIMARY KEY NOT NULL,
         //     "name" TEXT,
         //     "email" TEXT NOT NULL UNIQUE
         // )
-        return true
+        
     } catch {
         print (error)
         return false
@@ -56,7 +54,7 @@ func CreateTable() -> Bool {
 
 func InsertIntoDB(staff: Employee) -> Bool {
     do{
-        let db = try Connection(databaseFilePath)
+        let db = try Connection(Constants.databaseFilePath)
         
         let employees = Table("employees")
         let id = Expression<String>("id")
@@ -72,6 +70,7 @@ func InsertIntoDB(staff: Employee) -> Bool {
         try db.run(insert)
         return true
         // INSERT INTO "users" ("name", "email") VALUES ('Alice', 'alice@mac.com')
+        
     }catch{
         print(error)
         return false
@@ -82,7 +81,7 @@ func SelectFromDB() -> Array<Employee> {
     var staffLst: [Employee] = []
     
     do{
-        let db = try Connection(databaseFilePath)
+        let db = try Connection(Constants.databaseFilePath)
         
         let employees = Table("employees")
         let id = Expression<String>("id")
@@ -103,6 +102,7 @@ func SelectFromDB() -> Array<Employee> {
         }
         return staffLst
         // SELECT * FROM "users"
+        
     }catch{
         print(error)
         if CreateTable(){
@@ -118,7 +118,7 @@ func SelectFromDB() -> Array<Employee> {
 func UpdateToDB(staff: Employee, newStaff: Employee) -> Bool {
     print("Entro al Update")
     do{
-        let db = try Connection(databaseFilePath)
+        let db = try Connection(Constants.databaseFilePath)
         
         let employees = Table("employees")
         let id = Expression<String>("id")
@@ -139,9 +139,10 @@ func UpdateToDB(staff: Employee, newStaff: Employee) -> Bool {
         try db.run(employee.update(phone <- phone.replace(staff.phone, with: newStaff.phone)))
         try db.run(employee.update(dateBirth <- dateBirth.replace(staff.dateBirth , with: newStaff.dateBirth)))
         try db.run(employee.update(email <- email.replace(staff.email, with: newStaff.email)))
+        return true
         // UPDATE "users" SET "email" = replace("email", 'mac.com', 'me.com')
         // WHERE ("id" = 1)
-        return true
+        
     }catch{
         print(error)
         return false
@@ -150,7 +151,7 @@ func UpdateToDB(staff: Employee, newStaff: Employee) -> Bool {
 
 func DeleteFromDataBase(staff: Employee){
     do {
-        let db = try Connection(databaseFilePath)
+        let db = try Connection(Constants.databaseFilePath)
         
         let employees = Table("employees")
         let id = Expression<String>("id")
@@ -164,6 +165,3 @@ func DeleteFromDataBase(staff: Employee){
         print(error)
     }
 }
-
-// try db.scalar(employees.count) // 0
-// SELECT count(*) FROM "users"

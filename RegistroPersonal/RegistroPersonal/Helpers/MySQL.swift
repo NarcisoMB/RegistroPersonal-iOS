@@ -5,17 +5,74 @@
 import Foundation
 import OHMySQL
 
-func fetchData(){
-    let userData = MySQLConfiguration(user: "y8p4b3rcv7vw4vlo", password: "e3rgl5vcl5tw57c9", serverName: "18.207.39.42", dbName: "vbm2uuxxcscf4x3i", port: 3306, socket: "/mysql/mysql.sock")
-    let coordinator = MySQLStoreCoordinator(configuration: userData)
-    coordinator.encoding = .UTF8MB4
-    coordinator.connect()
+func createTableMySQL(){
+    Constants.coordinator.encoding = .UTF8MB4
+    Constants.coordinator.connect()
     
     let context = MySQLQueryContext()
-    context.storeCoordinator = coordinator
+    context.storeCoordinator = Constants.coordinator
+    
+    let queryString = "CREATE TABLE vbm2uuxxcscf4x3i.users ( id varchar(100) NULL, area varchar(100) NULL, name varchar(100) NULL, stLastName varchar(100) NULL, ndLastName varchar(100) NULL, phone varchar(100) NULL, email varchar(100) NULL, dateBirth varchar(100) NULL)"
+    let queryRequest = MySQLQueryRequest(query: queryString)
+    try? context.execute(queryRequest)
+}
+
+func dropTableMySQL(){
+    
+    Constants.coordinator.encoding = .UTF8MB4
+    Constants.coordinator.connect()
+    
+    let context = MySQLQueryContext()
+    context.storeCoordinator = Constants.coordinator
+    
+    let dropQueryString = "DROP TABLE users"
+    let dropQueryRequest = MySQLQueryRequest(query: dropQueryString)
+    try? context.execute(dropQueryRequest)
+}
+
+func insertTableMySQL(staff: Employee){
+    
+    Constants.coordinator.encoding = .UTF8MB4
+    Constants.coordinator.connect()
+    
+    let context = MySQLQueryContext()
+    context.storeCoordinator = Constants.coordinator
+    
+    let queryString = "INSERT INTO vbm2uuxxcscf4x3i.users (id, area, name, stLastName, ndLastName, phone, dateBirth, email) VALUES('\(staff.id)', '\(staff.area)', '\(staff.name)', '\(staff.stLastName)', '\(staff.ndLastName)', '\(staff.phone)', '\(staff.dateBirth)', '\(staff.email)');"
+    let queryRequest = MySQLQueryRequest(query: queryString)
+    try! context.execute(queryRequest)
+    
+}
+
+func fetchTableMySQL() -> Array<Employee>{
+    
+    var staffLst: [Employee] = []
+    
+    Constants.coordinator.encoding = .UTF8MB4
+    Constants.coordinator.connect()
+    
+    let context = MySQLQueryContext()
+    context.storeCoordinator = Constants.coordinator
     
     let queryString = "SELECT * FROM vbm2uuxxcscf4x3i.users;"
     let queryRequest = MySQLQueryRequest(query: queryString)
-    let response = try? context.executeQueryRequestAndFetchResult(queryRequest)
-    print(response)
+    staffLst = try! context.executeQueryRequestAndFetchResult(queryRequest) as! [Employee]
+    
+    return staffLst
+}
+
+func updateTableMySQL(staffList: [Employee]){
+    
+    Constants.coordinator.encoding = .UTF8MB4
+    Constants.coordinator.connect()
+    
+    let context = MySQLQueryContext()
+    context.storeCoordinator = Constants.coordinator
+    
+    for staff in staffList {
+        let queryString = "UPDATE vbm2uuxxcscf4x3i.users SET area='\(staff.area)', name='\(staff.name)', stLastName='\(staff.stLastName)', ndLastName='\(staff.ndLastName)', phone='\(staff.phone)', dateBirth='\(staff.dateBirth)', email='\(staff.email)' WHERE id='\(staff.id)';"
+        let queryRequest = MySQLQueryRequest(query: queryString)
+        try! context.execute(queryRequest)
+    }
+    
 }

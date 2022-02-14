@@ -10,6 +10,9 @@ struct ListStaff: View {
     @Binding var staff: Employee
     @Binding var staffLst: [Employee]
     
+    @State var updatingDB: Bool = false
+    @State var staffLstMySQL: [Employee]!
+    
     @ObservedObject var model = SwiftUIViewCModel.shared
     
     var body: some View {
@@ -50,9 +53,16 @@ struct ListStaff: View {
             .navigationBarItems(
                 leading:
                     Button(action: {
-                        fetchData()
+                        dropTableMySQL()
+                        createTableMySQL()
+                        for staff in staffLst {
+                            insertTableMySQL(staff: staff)
+                        }
                     }){
                         Label("Sync", systemImage: "arrow.counterclockwise.icloud")
+                    }
+                    .alert(isPresented: $updatingDB) {
+                        Alert(title: Text("Empleado Agregado."))
                     },
                 trailing:
                     Button(action: {

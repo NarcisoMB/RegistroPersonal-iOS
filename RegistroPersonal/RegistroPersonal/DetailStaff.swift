@@ -26,8 +26,8 @@ struct DetailStaff: View {
     @State var email: String = ""
     @State var phone: String = ""
     @State var dateBirth: Date = Date.now
-    @State private var successfulInsertion = false
-    @State private var emptySpaces = false
+    @State var successfulInsertion = false
+    @State var emptySpaces = false
     
     @FocusState var focusedField: Field?
     
