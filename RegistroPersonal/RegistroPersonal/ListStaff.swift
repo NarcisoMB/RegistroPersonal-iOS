@@ -50,9 +50,9 @@ struct ListStaff: View {
             .navigationBarItems(
                 leading:
                     Button(action: {
-
+                        fetchData()
                     }){
-                        Label("Add", systemImage: "arrow.counterclockwise.icloud")
+                        Label("Sync", systemImage: "arrow.counterclockwise.icloud")
                     },
                 trailing:
                     Button(action: {
